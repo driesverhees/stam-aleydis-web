@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
+import MemberStore from '../data/memberStore';
+
 
 class AdminMembers extends Component {
+  componentDidMount() {
+    let members = MemberStore.getState();
+
+  }
+
   render() {
     return (
       <div>
