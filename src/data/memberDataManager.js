@@ -3,6 +3,9 @@ import Member from './objects/member';
 
 const MemberDataManager = {
     loadMembers() {
+        // The ajax call should take authentication into account and only return the members where he/she has access to
+        // Admin -> All members
+        // Someone else -> only him-/herself
         setTimeout(() => {
             MemberDispatcher.dispatch({
                 type: 'members/loaded',

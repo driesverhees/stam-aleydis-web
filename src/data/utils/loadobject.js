@@ -7,13 +7,18 @@ export const LoadObjectData = Immutable.Record({
 });
 
 export class LoadObject {
-    constructor(loadFunc) {
-        this._loadFunc = loadFunc;
+    /**
+     * @param {function} loadFunc - Action to trigger a load action
+     * @param {function} shouldLoadFunc - Function to check if a load action should be triggered, the loadData is an input
+     */
+    constructor(loadFunc, shouldLoadFunc) {
+        this._loadFunc = loadFunc; // Action to trigger a load action
+        this._shouldLoadFunc = shouldLoadFunc || ((loadData) =>  loadData.state === LoadStates.NONE)
         this._loadData = new LoadObjectData({state: LoadStates.NONE});
     }
 
     getData() {
-        if (this._loadData.state === LoadStates.NONE) {
+        if (this._shouldLoadFunc(this._loadData)) {
             // Not yet loaded, so start loading
             setTimeout(() => { this._loadFunc(); },0);
         }
@@ -24,7 +29,7 @@ export class LoadObject {
         if (loadData === this._loadData){
             return this;
         }
-        let nextLoadObj = new LoadObject(this._loadFunc);
+        let nextLoadObj = new LoadObject(this._loadFunc, this._shouldLoadFunc);
         nextLoadObj._loadData = loadData;
         return nextLoadObj;
     }
