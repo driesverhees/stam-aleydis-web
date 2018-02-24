@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import MemberStore from '../data/memberStore';
 import * as LoadStates from '../data/utils/loadstates';
 import MemberEditForm from './memberEditForm';
 import MembersOverview from './membersOverview'
 
-class AdminMembers extends Component {
+class AdminMembers extends React.PureComponent {
 
 
   render() {
