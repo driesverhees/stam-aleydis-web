@@ -81,6 +81,10 @@ export default class AdminMemberEditForm extends Component {
         }
     }
 
+    saveChanges() {
+        alert("TODO: save changes")
+    }
+
     render() {
         if (this.state.componentState === LoadStates.LOADED) {
             return <div className="row">
@@ -89,19 +93,24 @@ export default class AdminMemberEditForm extends Component {
                             <div className="input-field col s6">
                                 <i className="material-icons prefix">account_circle</i>
                                 <input placeholder="Placeholder" id="first_name" type="text" value={this.state.firstName} onChange={(evt) => this.setState({firstName: evt.target.value})} className="validate" />
-                                <label htmlFor="first_name">First Name</label>
+                                <label htmlFor="first_name">Voornaam</label>
                             </div>
                             <div className="input-field col s6">
                                 <i className="material-icons prefix">account_circle</i>
                                 <input id="last_name" type="text"  value={this.state.lastName} onChange={(evt) => this.setState({lastName: evt.target.value})} className="validate" />
-                                <label htmlFor="last_name">Last Name</label>
+                                <label htmlFor="last_name">Achternaam</label>
                             </div>
                         </div>
                         <div className="row">
                             <div className="input-field col s12">
                                 <i className="material-icons prefix">mail</i>
-                                <input id="email" type="email" className="validate" />
+                                <input id="email" type="email" className="validate" data-error="Gelieve een geldig e-mailadres in te vullen" />
                                 <label htmlFor="email">Email</label>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col s12">
+                                <a class="waves-effect waves-light btn" onClick={() => this.saveChanges()}><i class="material-icons left">send</i>Opslaan</a>
                             </div>
                         </div>
                     </form>
