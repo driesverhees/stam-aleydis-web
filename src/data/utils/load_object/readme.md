@@ -1,1 +1,0 @@
-This is a copy from https://github.com/facebook/flux/tree/master/examples/flux-async/src/load_object, under the BSD license

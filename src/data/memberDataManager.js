@@ -1,12 +1,18 @@
-import Member from './objects/member';
 import MemberDispatcher from './memberDispatcher';
+import Member from './objects/member';
 
 const MemberDataManager = {
     loadMembers() {
-        MemberDispatcher.dispatch({
-            type: 'members/loaded',
-            members: ["Jan", "Peter"],
-          });
+        setTimeout(() => {
+            MemberDispatcher.dispatch({
+                type: 'members/loaded',
+                members: [
+                    new Member({id: 12, firstName: "JanT", lastName: "TJanssen"}),
+                    new Member({id: 13, firstName: "PeterT", lastName: "TPeeters"})
+                ]
+              });
+        }, 1000); // 1000ms = 1sec ajax call
+
       },
 };
 

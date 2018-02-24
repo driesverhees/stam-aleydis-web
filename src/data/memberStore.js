@@ -1,42 +1,33 @@
-import type {Action} from './memberActions';
+import * as Actions from './memberActions';
 import Immutable from 'immutable';
-import LoadObject from './utils/load_object/LoadObject';
-import LoadObjectState from './utils/load_object/LoadObjectState';
+import {LoadObject, LoadObjectData} from './utils/loadobject';
+import * as LoadStates from './utils/loadstates';
 import {ReduceStore} from 'flux/utils';
 import MemberDataManager from './memberDataManager';
 import MemberDispatcher from './memberDispatcher';
 
-type State = LoadObjectState<Immutable.List<string>>;
-
-class MemberStore extends ReduceStore<Action, State> {
+class MemberStore extends ReduceStore {
   constructor() {
     super(MemberDispatcher);
   }
 
-  getInitialState(): State {
-    return new LoadObjectState(() => MemberDispatcher.dispatch({
-      type: 'members/start-load',
+  getInitialState() {
+    return new LoadObject(() => MemberDispatcher.dispatch({
+      type: Actions.StartLoad,
     }));
   }
 
-  reduce(state: State, action: Action): State {
+  reduce(state, action) {
     switch (action.type) {
-
-      ///// Loading /////
-
-      case 'members/start-load':
-        alert("lets start loading");
+      case Actions.StartLoad:
         MemberDataManager.loadMembers();
-        return state.setLoadObject(LoadObject.loading());
+        return state.setLoadData(new LoadObjectData({state: LoadStates.LOADING}));
 
-      case 'members/loaded':
-        alert("it is loaded...");
-        return state.setLoadObject(LoadObject.withValue(
-          Immutable.List(action.members)
-        ));
+      case Actions.Loaded:
+        return state.setLoadData(new LoadObjectData({state: LoadStates.LOADED, data: Immutable.List(action.members)}));
 
-      case 'members/load-error':
-        return state.setLoadObject(LoadObject.withError(action.error));
+      case Actions.LoadError:
+        return null;
 
       default:
         console.error("Unknown action in member store");

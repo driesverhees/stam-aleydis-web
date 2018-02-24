@@ -1,4 +1,3 @@
 import {Dispatcher} from 'flux';
-import type {Action} from './memberActions';
-const dispatcher: Dispatcher<Action> = new Dispatcher();
+const dispatcher = new Dispatcher();
 export default dispatcher;
