@@ -87,12 +87,21 @@ export default class AdminMemberEditForm extends Component {
                     <form className="col s12">
                         <div className="row">
                             <div className="input-field col s6">
+                                <i className="material-icons prefix">account_circle</i>
                                 <input placeholder="Placeholder" id="first_name" type="text" value={this.state.firstName} onChange={(evt) => this.setState({firstName: evt.target.value})} className="validate" />
                                 <label htmlFor="first_name">First Name</label>
                             </div>
                             <div className="input-field col s6">
+                                <i className="material-icons prefix">account_circle</i>
                                 <input id="last_name" type="text"  value={this.state.lastName} onChange={(evt) => this.setState({lastName: evt.target.value})} className="validate" />
                                 <label htmlFor="last_name">Last Name</label>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="input-field col s12">
+                                <i className="material-icons prefix">mail</i>
+                                <input id="email" type="email" className="validate" />
+                                <label htmlFor="email">Email</label>
                             </div>
                         </div>
                     </form>
