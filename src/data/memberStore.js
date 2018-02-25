@@ -27,7 +27,11 @@ class MemberStore extends ReduceStore {
         return state.setLoadData(new LoadObjectData({state: LoadStates.LOADED, data: Immutable.List(action.members)}));
 
       case Actions.LoadError:
+        alert("TODO: MEMBER LOAD ERROR");
         return null;
+
+      case Actions.Refresh:
+        return this.getInitialState();
 
       default:
         console.error("Unknown action in member store");

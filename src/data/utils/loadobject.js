@@ -17,10 +17,10 @@ export class LoadObject {
         this._loadData = new LoadObjectData({state: LoadStates.NONE});
     }
 
-    getData() {
+    getData(inputData) {
         if (this._shouldLoadFunc(this._loadData)) {
             // Not yet loaded, so start loading
-            setTimeout(() => { this._loadFunc(); },0);
+            setTimeout(() => { this._loadFunc(inputData); },0);
         }
         return this._loadData;
     }

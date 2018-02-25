@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import MemberStore from '../data/memberStore';
 import * as LoadStates from '../data/utils/loadstates';
-import MemberEditForm from './memberEditForm';
 import { Link } from 'react-router-dom';
 
 export default class AdminMembersOverview extends Component {

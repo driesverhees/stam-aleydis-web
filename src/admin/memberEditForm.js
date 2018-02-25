@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { NavLink, Switch, Route } from 'react-router-dom';
 import MemberStore from '../data/memberStore';
+import MemberDataManager from '../data/memberDataManager';
 import * as LoadStates from '../data/utils/loadstates';
 
 export default class AdminMemberEditForm extends Component {
