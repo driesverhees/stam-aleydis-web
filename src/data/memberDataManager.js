@@ -45,6 +45,7 @@ const MemberDataManager = {
                 mockMemberData[arrayIndex] = memberData;
                 deferredObj.resolve(memberData);
             } else {
+                alert("cannot find ID");
                 // Error
             }
         }, 1000);

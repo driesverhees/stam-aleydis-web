@@ -8,6 +8,7 @@ export default class AdminMemberForm extends React.Component {
         // Set initial state equal to all properties of the member object
         let memberData = (props.member) ? props.member : new Member({})
         this.state = {
+            id: memberData.id,
             firstName: memberData.firstName,
             lastName: memberData.lastName
         };
