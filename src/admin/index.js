@@ -16,10 +16,10 @@ class AdminIndex extends Component {
       <div>
         <ul className="tabs_" id="admin_nav_tabs">
           <li className="tab col s3"><NavLink to="/admin" activeClassName="active">Index</NavLink></li>
-          <li className="tab col s3"><NavLink to="/admin/leden" activeClassName="active">Leden</NavLink></li>
+          <li className="tab col s3"><NavLink to="/admin/members" activeClassName="active">Leden</NavLink></li>
         </ul>
         <Switch>
-          <Route path='/admin/leden' component={AdminMembers}/>
+          <Route path='/admin/members' component={AdminMembers}/>
         </Switch>
       </div>
     );

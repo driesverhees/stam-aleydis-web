@@ -34,8 +34,10 @@ class MemberStore extends ReduceStore {
         return this.getInitialState();
 
       default:
-        console.error("Unknown action in member store");
+        console.error("Unknown action in member store: " + action.type);
     }
+    // No update of the state
+    return null;
   }
 
 }

@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import MemberStore from '../data/memberStore';
 import MemberDataManager from '../data/memberDataManager';
 import * as LoadStates from '../data/utils/loadstates';
+import MemberForm from './memberForm';
 
-export default class AdminMemberEditForm extends Component {
+export default class AdminMemberEditForm extends React.Component {
     constructor(props) {
         super(props);
         // Set initial state
@@ -27,7 +28,10 @@ export default class AdminMemberEditForm extends Component {
     }
 
     componentDidMount() {
-        this.removeMemberListener = MemberStore.addListener(() => this.setState({allMembers: MemberStore.getState()})).remove;
+        this.removeMemberListener = MemberStore.addListener(() => this.setState({
+            allMembers: MemberStore.getState(),
+            componentState: LoadStates.NONE // This will refresh the page (note that the store will also emit an event if something in the list has changed, even irrevelant (and then the local changes will be lost))
+        })).remove;
         this.loadMemberData();
         this.refreshInputFields();
     }
@@ -54,9 +58,8 @@ export default class AdminMemberEditForm extends Component {
             let memberData = allMembersData.data.find((mem) => mem.id === this.state.id);
             if (memberData) {
                 this.setState({
+                    originalMemberData: memberData,
                     componentState: LoadStates.LOADED,
-                    firstName: memberData.firstName,
-                    lastName: memberData.lastName
                 });
             } else {
                 this.setState({componentState: LoadStates.ERROR});
@@ -80,40 +83,21 @@ export default class AdminMemberEditForm extends Component {
         }
     }
 
-    saveChanges() {
-        alert("TODO: save changes")
+    saveChanges(memberData) {
+        // Ask the data manager to update the member
+        MemberDataManager.updateMember(memberData)
+        .done(function() {
+            // No action required on done, since the store will emit the change
+            // Maybe later, we want to show a successful message
+        })
+        .fail(function() {
+            alert("ERROR saving member data");
+        });
     }
 
     render() {
         if (this.state.componentState === LoadStates.LOADED) {
-            return <div className="row">
-                    <form className="col s12">
-                        <div className="row">
-                            <div className="input-field col s6">
-                                <i className="material-icons prefix">account_circle</i>
-                                <input placeholder="Placeholder" id="first_name" type="text" value={this.state.firstName} onChange={(evt) => this.setState({firstName: evt.target.value})} className="validate" />
-                                <label htmlFor="first_name">Voornaam</label>
-                            </div>
-                            <div className="input-field col s6">
-                                <i className="material-icons prefix">account_circle</i>
-                                <input id="last_name" type="text"  value={this.state.lastName} onChange={(evt) => this.setState({lastName: evt.target.value})} className="validate" />
-                                <label htmlFor="last_name">Achternaam</label>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="input-field col s12">
-                                <i className="material-icons prefix">mail</i>
-                                <input id="email" type="email" className="validate" data-error="Gelieve een geldig e-mailadres in te vullen" />
-                                <label htmlFor="email">Email</label>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col s12">
-                                <a class="waves-effect waves-light btn" onClick={() => this.saveChanges()}><i class="material-icons left">send</i>Opslaan</a>
-                            </div>
-                        </div>
-                    </form>
-                    </div>;
+            return <MemberForm member={this.state.originalMemberData} onSubmit={this.saveChanges} />
         } else if (this.state.componentState === LoadStates.ERROR) {
             return "show error";
         }
