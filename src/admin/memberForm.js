@@ -1,8 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MemberStore from '../data/memberStore';
-import MemberDataManager from '../data/memberDataManager';
-import * as LoadStates from '../data/utils/loadstates';
 import Member from '../data/objects/member';
 
 export default class AdminMemberForm extends React.Component {

@@ -40,7 +40,7 @@ const MemberDataManager = {
         // Simulate Ajax call and put in done after 1 second
         setTimeout(() => {
             // Find matching element
-            let arrayIndex = mockMemberData.findIndex((mem) => mem.id == memberData.id);
+            let arrayIndex = mockMemberData.findIndex((mem) => mem.id === memberData.id);
             if (arrayIndex >= 0) {
                 mockMemberData[arrayIndex] = memberData;
                 deferredObj.resolve(memberData);
@@ -62,7 +62,7 @@ const MemberDataManager = {
         });
         setTimeout(() => {
             let newMockMemberId = Math.floor(Math.random() * 100000000); // Random number between 0 and 1e8
-            let newMemberObj = new Member(Object.assign({},newMemberObj, {id: newMockMemberId}));
+            let newMemberObj = new Member(Object.assign({},memberData, {id: newMockMemberId}));
             mockMemberData.push(newMemberObj);
             deferredObj.resolve(newMemberObj);
         }, 1000);
