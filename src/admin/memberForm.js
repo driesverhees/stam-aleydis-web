@@ -58,18 +58,16 @@ export default class AdminMemberForm extends React.Component {
         return <div className="row">
                 <form className="col s12">
                     <div className="row">
-                        <div className="input-field col s6">
+                        <div className="input-field col s12 m6">
                             <i className="material-icons prefix">account_circle</i>
                             <input id="first_name" type="text" value={this.state.firstName} onChange={(evt) => this.setChange({firstName: evt.target.value})} className="validate" />
                             <label htmlFor="first_name">Voornaam</label>
                         </div>
-                        <div className="input-field col s6">
+                        <div className="input-field col s12 m6">
                             <i className="material-icons prefix">account_circle</i>
                             <input id="last_name" type="text"  value={this.state.lastName} onChange={(evt) => this.setChange({lastName: evt.target.value})} className="validate" />
                             <label htmlFor="last_name">Achternaam</label>
                         </div>
-                    </div>
-                    <div className="row">
                         <div className="input-field col s12">
                             <i className="material-icons prefix">mail</i>
                             <input id="email" type="email" value={this.state.email}  onChange={(evt) => this.setChange({email: evt.target.value})} className="validate" data-error="Gelieve een geldig e-mailadres in te vullen" />
