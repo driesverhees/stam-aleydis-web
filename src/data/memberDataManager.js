@@ -63,7 +63,8 @@ const MemberDataManager = {
         });
         setTimeout(() => {
             let newMockMemberId = Math.floor(Math.random() * 100000000); // Random number between 0 and 1e8
-            let newMemberObj = new Member(Object.assign({},memberData, {id: newMockMemberId}));
+            let newMemberObj = new Member(Object.assign({id: newMockMemberId},memberData));
+            alert(memberData.firstName + "->" + newMemberObj.firstName);
             mockMemberData.push(newMemberObj);
             deferredObj.resolve(newMemberObj);
         }, 1000);

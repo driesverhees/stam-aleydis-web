@@ -8,7 +8,7 @@ export default class AdminMemberForm extends React.Component {
         // Set initial state equal to all properties of the member object
         let memberData = (props.member) ? props.member : new Member({})
         this.state = {
-            id: memberData.id,
+            id: memberData.id, // This ID is not changes, it is kept in the state and therefore used when creating a new member object
             firstName: memberData.firstName,
             lastName: memberData.lastName
         };
@@ -87,9 +87,12 @@ export default class AdminMemberForm extends React.Component {
 
 AdminMemberForm.propTypes = {
     onChange: PropTypes.func,
+    onSubmit: PropTypes.func,
     submitDisabled: PropTypes.bool
 };
   
 AdminMemberForm.defaultProps = {
+    onChange: undefined,
+    onSubmit: undefined,
     submitDisabled: false
 };

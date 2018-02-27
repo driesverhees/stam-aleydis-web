@@ -13,6 +13,7 @@ export default class AdminMemberEditForm extends React.Component {
             componentState: LoadStates.NONE,
             allMembers: MemberStore.getState()
         };
+        this.updateUser = this.updateUser.bind(this);
     }
 
     getMemberIdFromProps(props) {
@@ -83,12 +84,14 @@ export default class AdminMemberEditForm extends React.Component {
         }
     }
 
-    saveChanges(memberData) {
+    updateUser(memberData) {
+        let history = this.props.history;
         // Ask the data manager to update the member
         MemberDataManager.updateMember(memberData)
-        .done(function() {
+        .done(() => {
             // No action required on done, since the store will emit the change
             // Maybe later, we want to show a successful message
+            history.push("/admin/members")
         })
         .fail(function() {
             alert("ERROR saving member data");
@@ -97,7 +100,7 @@ export default class AdminMemberEditForm extends React.Component {
 
     render() {
         if (this.state.componentState === LoadStates.LOADED) {
-            return <MemberForm member={this.state.originalMemberData} onSubmit={this.saveChanges} />
+            return <MemberForm member={this.state.originalMemberData} onSubmit={this.updateUser} />
         } else if (this.state.componentState === LoadStates.ERROR) {
             return "show error";
         }

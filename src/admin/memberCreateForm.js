@@ -9,14 +9,24 @@ export default class AdminMemberEditForm extends React.PureComponent {
         this.state = {
             newMemberData: null
         };
+        this.createUser = this.createUser.bind(this);
     }
 
     createUser(memberData) {
-
-        alert(memberData.firstName);
+        let history = this.props.history;
+        // Ask the data manager to update the member
+        MemberDataManager.createMember(memberData)
+        .done(() => {
+            // No action required on done, since the store will emit the change
+            // Maybe later, we want to show a successful message
+            history.push("/admin/members")
+        })
+        .fail(function() {
+            alert("ERROR saving member data");
+        });
     }
 
     render() {
-        return <MemberForm member={this.state.newMemberData} submitDisabled={true} onSubmit={this.createUser} />;
+        return <MemberForm member={this.state.newMemberData} submitDisabled={false} onSubmit={this.createUser} />;
     }
 }
