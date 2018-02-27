@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import AdminMembers from './members.js';
+import AdminCalendar from './calendar.js';
 
 class AdminIndex extends React.PureComponent {
   render() {
@@ -15,6 +16,7 @@ class AdminIndex extends React.PureComponent {
               <div className="section">
                 <Switch>
                   <Route path='/admin/members' component={AdminMembers}/>
+                  <Route path='/admin/calendar' component={AdminCalendar}/>
                 </Switch>
               </div>
             </div>;
@@ -22,7 +24,7 @@ class AdminIndex extends React.PureComponent {
 
   getTabLink(link, label) {
     let isActive = this.props.location.pathname && this.props.location.pathname.toLowerCase().indexOf(link.toLowerCase()) !== -1;
-    return <a onClick={() => {
+    return <a href="#!" onClick={() => {
               this.props.history.push(link);
             }} className={isActive ? "active" : ""}>{label}</a>;
   }
