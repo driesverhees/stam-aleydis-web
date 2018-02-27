@@ -10,7 +10,8 @@ export default class AdminMemberForm extends React.Component {
         this.state = {
             id: memberData.id, // This ID is not changes, it is kept in the state and therefore used when creating a new member object
             firstName: memberData.firstName,
-            lastName: memberData.lastName
+            lastName: memberData.lastName,
+            email: memberData.email
         };
     }
 
@@ -71,7 +72,7 @@ export default class AdminMemberForm extends React.Component {
                     <div className="row">
                         <div className="input-field col s12">
                             <i className="material-icons prefix">mail</i>
-                            <input id="email" type="email" className="validate" data-error="Gelieve een geldig e-mailadres in te vullen" />
+                            <input id="email" type="email" value={this.state.email}  onChange={(evt) => this.setChange({email: evt.target.value})} className="validate" data-error="Gelieve een geldig e-mailadres in te vullen" />
                             <label htmlFor="email">Email</label>
                         </div>
                     </div>

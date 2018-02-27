@@ -3,8 +3,8 @@ import MemberDispatcher from './memberDispatcher';
 import Member from './objects/member';
 
 let mockMemberData = [
-    new Member({id: 12, firstName: "Jan", lastName: "Janssens"}),
-    new Member({id: 13, firstName: "Peter", lastName: "Peeters"})
+    new Member({id: 12, firstName: "Jan", lastName: "Janssens", email: ""}),
+    new Member({id: 13, firstName: "Peter", lastName: "Peeters", email: ""})
 ];
 
 const MemberDataManager = {
@@ -22,7 +22,7 @@ const MemberDataManager = {
         // Simulate an Ajax call and put (after 1sec) the deferred object in the done-state
         setTimeout(() => {
             deferredObj.resolve(mockMemberData)
-        }, 1000); // 1000ms = 1sec ajax call
+        }, 100); // 100ms = 0.1sec ajax call
         // Return the promise object, so caller can't change the deferred object
         return deferredObj.promise();
       },
@@ -48,7 +48,7 @@ const MemberDataManager = {
                 alert("cannot find ID");
                 // Error
             }
-        }, 1000);
+        }, 100);
         // Return the promise object
         return deferredObj.promise();
       },
@@ -63,11 +63,10 @@ const MemberDataManager = {
         });
         setTimeout(() => {
             let newMockMemberId = Math.floor(Math.random() * 100000000); // Random number between 0 and 1e8
-            let newMemberObj = new Member(Object.assign({id: newMockMemberId},memberData));
-            alert(memberData.firstName + "->" + newMemberObj.firstName);
+            let newMemberObj = memberData.set("id", newMockMemberId);
             mockMemberData.push(newMemberObj);
             deferredObj.resolve(newMemberObj);
-        }, 1000);
+        }, 100);
         // Return the promise object
         return deferredObj.promise();
       }

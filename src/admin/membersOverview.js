@@ -49,7 +49,7 @@ export default class AdminMembersOverview extends Component {
             <tbody>
               {
                 membersData.data.map((member) => {
-                  return <tr>
+                  return <tr key={"memberRow" + member.id}>
                           <td>{member.firstName}</td>
                           <td>{member.lastName}</td>
                           <td><Link to={"/admin/members/edit/"+member.id}>Edit</Link></td>
