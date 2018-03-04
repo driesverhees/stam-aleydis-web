@@ -52,6 +52,23 @@ const LoginDataManager = {
             }
         }, 100);
         return deferredObj.promise();
+    },
+    logout() {
+        let deferredObj = window.jQuery.Deferred();
+        deferredObj.done(function() {
+            AppDispatcher.dispatch({
+                type: Actions.LogoutSuccess
+            });
+        });
+        deferredObj.fail(function() {
+            AppDispatcher.dispatch({
+                // ignored as it does not require a store update
+            });
+        });
+        setTimeout(() => {
+            deferredObj.resolve(mockSession);
+        }, 100);
+        return deferredObj.promise();        
     }
 };
 
