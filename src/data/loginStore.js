@@ -1,5 +1,4 @@
 import * as Actions from './loginActions';
-import Immutable from 'immutable';
 import {LoadObject, LoadObjectData} from './utils/loadobject';
 import * as LoadStates from './utils/loadstates';
 import {ReduceStore} from 'flux/utils';
@@ -11,9 +10,8 @@ class LoginStore extends ReduceStore {
     super(AppDispatcher);
   }
 
-  // LOADED = action performed (does not mean that user is logged-on)
-  // ERROR = an (unexpected) error occurred
-  // If the user is not logged-on, then the data will be NULL (but state LOADED)
+  // LOADED = action performed + logged-on
+  // ERROR = action performed but no data (=not logged-on)
   getInitialState() {
     return new LoadObject(() => AppDispatcher.dispatch({
       type: Actions.StartAutoLogin,
@@ -22,7 +20,7 @@ class LoginStore extends ReduceStore {
 
   reduce(state, action) {
     switch (action.type) {
-      case Actions.StartLoad:
+      case Actions.StartAutoLogin:
         LoginDataManager.loadLoginData();
         return state.setLoadData(new LoadObjectData({state: LoadStates.LOADING}));
 
@@ -30,7 +28,7 @@ class LoginStore extends ReduceStore {
         return state.setLoadData(new LoadObjectData({state: LoadStates.LOADED, data: action.loginData}));
 
       case Actions.LoginError:
-        return state.setLoadData(new LoadObjectData({state: LoadStates.FAILED}));
+        return state.setLoadData(new LoadObjectData({state: LoadStates.ERROR}));
 
       case Actions.Refresh:
         return this.getInitialState();
