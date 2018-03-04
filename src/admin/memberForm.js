@@ -75,7 +75,7 @@ export default class AdminMemberForm extends React.Component {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col s12">
+                        <div className="col s12 center-align">
                             <a className={"waves-effect waves-light btn " + (this.props.submitDisabled ? "disabled" : "")} onClick={() => this.submit()}><i className="material-icons left">send</i>Opslaan</a>
                         </div>
                     </div>

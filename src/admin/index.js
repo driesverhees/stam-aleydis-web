@@ -33,7 +33,7 @@ class AdminIndex extends React.PureComponent {
     // If it is loaded and the user is logged in, then show the admin page
     if (loginStateData.state === LoadStates.LOADED && loginStateData.data) { 
       return <div>
-                <div className="section">
+                <div className="section center-align">
                   <ul className="tabs" id="admin_nav_tabs">
                     <li className="tab col s3">{this.getTabLink("/admin/start","Start")}</li>
                     <li className="tab col s3">{this.getTabLink("/admin/members","Leden")}</li>

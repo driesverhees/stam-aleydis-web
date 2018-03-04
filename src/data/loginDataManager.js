@@ -5,6 +5,8 @@ import LoginData from './objects/loginData';
 
 let existingSession = false; // Put to FALSE if there is no existing session
 let mockSession = new LoginData({sessionId: 12345}); 
+let mockUserName = "test";
+let mockPassword = "test12345";
 
 const LoginDataManager = {
     // Perform an auto-login where an existing open session will be used
@@ -28,11 +30,28 @@ const LoginDataManager = {
             } else {
                 deferredObj.reject();
             }
-        }, 1000); // 1 sec for the ajax call
+        }, 100);
         return deferredObj.promise();
     },
     login(userName, password) {
-        alert(userName + " ->" + password);
+        let deferredObj = window.jQuery.Deferred();
+        deferredObj.done(function(loginData) {
+            AppDispatcher.dispatch({
+                type: Actions.LoginSuccess,
+                loginData: loginData
+            });
+        });
+        deferredObj.fail(function() {
+            // The fail can be igored, as it does not require a store update
+        });
+        setTimeout(() => {
+            if (userName === mockUserName && password === mockPassword) {
+                deferredObj.resolve(mockSession);
+            } else {
+                deferredObj.reject();
+            }
+        }, 100);
+        return deferredObj.promise();
     }
 };
 
