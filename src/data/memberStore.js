@@ -28,7 +28,7 @@ class MemberStore extends ReduceStore {
 
       case Actions.LoadError:
         alert("TODO: MEMBER LOAD ERROR");
-        return null;
+        return state;
 
       case Actions.Refresh:
         return this.getInitialState();
@@ -37,7 +37,7 @@ class MemberStore extends ReduceStore {
         console.error("Unknown action in member store: " + action.type);
     }
     // No update of the state
-    return null;
+    return state;
   }
 
 }

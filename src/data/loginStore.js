@@ -37,7 +37,7 @@ class LoginStore extends ReduceStore {
         console.error("Unknown action in login store: " + action.type);
     }
     // No update of the state
-    return null;
+    return state;
   }
 
 }
