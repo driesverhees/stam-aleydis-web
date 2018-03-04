@@ -4,7 +4,7 @@ import {LoadObject, LoadObjectData} from './utils/loadobject';
 import * as LoadStates from './utils/loadstates';
 import {ReduceStore} from 'flux/utils';
 import MemberDataManager from './memberDataManager';
-import MemberDispatcher from './memberDispatcher';
+import MemberDispatcher from './appDispatcher';
 
 class MemberStore extends ReduceStore {
   constructor() {

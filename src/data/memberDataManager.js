@@ -1,5 +1,5 @@
 import * as Actions from './memberActions';
-import MemberDispatcher from './memberDispatcher';
+import MemberDispatcher from './appDispatcher';
 import Member from './objects/member';
 
 let mockMemberData = [
