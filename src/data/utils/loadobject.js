@@ -15,7 +15,7 @@ export class LoadObject {
         this._loadFunc = loadFunc; // Action to trigger a load action
         this._shouldLoadFunc = shouldLoadFunc || ((loadData) =>  loadData.state === LoadStates.NONE)
         this._loadData = new LoadObjectData({state: LoadStates.NONE});
-        this._startedLoading = false; // Avoid that a load is trigger multiple team
+        this._startedLoading = false; // Avoid that a load is trigger multiple times
     }
 
     getData(inputData) {
