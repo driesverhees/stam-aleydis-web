@@ -15,12 +15,17 @@ export class LoadObject {
         this._loadFunc = loadFunc; // Action to trigger a load action
         this._shouldLoadFunc = shouldLoadFunc || ((loadData) =>  loadData.state === LoadStates.NONE)
         this._loadData = new LoadObjectData({state: LoadStates.NONE});
+        this._startedLoading = false; // Avoid that a load is trigger multiple team
     }
 
     getData(inputData) {
-        if (this._shouldLoadFunc(this._loadData)) {
+        if (!this._startedLoading && this._shouldLoadFunc(this._loadData)) {
             // Not yet loaded, so start loading
-            setTimeout(() => { this._loadFunc(inputData); },0);
+            this._startedLoading = true;
+            setTimeout(() => { 
+                this._loadFunc(inputData); 
+                this._startedLoading = false;
+            },0);
         }
         return this._loadData;
     }
