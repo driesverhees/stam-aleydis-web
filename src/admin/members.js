@@ -16,7 +16,7 @@ class AdminMembers extends React.PureComponent {
             </Switch>
             <div className="fixed-action-btn">
               <Link to="/admin/members/create" className="btn-floating btn-large">
-                <i className="large material-icons">add</i>
+                <i className="large material-icons">person_add</i>
               </Link>
             </div>
            </div>;

@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import LoginForm from './loginForm';
 import AdminMembers from './members';
+import AdminGroups from './groups';
 import AdminCalendar from './calendar';
 import LoginStore from '../data/loginStore';
 import * as LoadStates from '../data/utils/loadstates';
@@ -36,12 +37,14 @@ class AdminIndex extends React.PureComponent {
                 <div className="section center-align">
                   <ul className="tabs" id="admin_nav_tabs">
                     <li className="tab col s3">{this.getTabLink("/admin/start","Start")}</li>
+                    <li className="tab col s3">{this.getTabLink("/admin/groups","Groepen")}</li>
                     <li className="tab col s3">{this.getTabLink("/admin/members","Leden")}</li>
                     <li className="tab col s3">{this.getTabLink("/admin/calendar","Kalender")}</li>
                   </ul>
                 </div>
                 <div className="section">
                   <Switch>
+                    <Route path='/admin/groups' component={AdminGroups}/>
                     <Route path='/admin/members' component={AdminMembers}/>
                     <Route path='/admin/calendar' component={AdminCalendar}/>
                   </Switch>

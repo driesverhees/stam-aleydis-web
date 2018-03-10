@@ -12,11 +12,6 @@ export default class AdminMembersOverview extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    // Unselect the member if new properties are coming in
-    this.setState({selectedMemberId: null});
-  }
-
   componentDidMount() {
     // Add listener to the member store. 
     // If a change happens, the getInitialState will be called again. 
@@ -33,7 +28,6 @@ export default class AdminMembersOverview extends Component {
   }
 
   render() {
-    // If no ID is selected, then show the overview
     let membersData = this.state.members.getData();
     if (membersData.state === LoadStates.LOADED) {
       return (

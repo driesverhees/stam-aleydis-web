@@ -3,7 +3,7 @@ import AppDispatcher from './appDispatcher';
 import LoginData from './objects/loginData';
 
 
-let existingSession = false; // Put to FALSE if there is no existing session
+let existingSession = true; // Put to FALSE if there is no existing session
 let mockSession = new LoginData({sessionId: 12345}); 
 let mockUserName = "test";
 let mockPassword = "test12345";
